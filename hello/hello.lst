@@ -1,0 +1,25 @@
+ CLEAR STORAGE 1     ,008015,022026,030037,044,049,053053N000000N00001026                                         1
+ CLEAR STORAGE 2     L068116,105106,110117B101/I9I#071029C029056B026/B001/0991,001/001117I0?                      2
+ BOOTSTRAP           ,008015,022029,036040,047054,061068,072/061039              ,0010011040                      3
+0                                                                                                         PAGE    1
+0 SEQ PG LIN  LABEL  OP    OPERANDS                                            SFX CT  LOCN  INSTRUCTION TYPE  CARD A-ADDR  B-ADDR
+
+  101         *
+  102         * 1401 HELLO WORLD PROGRAM
+  103         * PROGRAMMER: JOHN RINEY
+  104         *
+1                          HELLO WORLD                                                                    PAGE    2
+0 SEQ PG LIN  LABEL  OP    OPERANDS                                            SFX CT  LOCN  INSTRUCTION TYPE  CARD A-ADDR  B-ADDR
+
+  105                JOB   HELLO WORLD
+  106                CTL   6611
+  107         TEXT   DCW   @HELLO WORLD, I AM THE IBM 1401!@                       31  0363                       4
+  108         START  CS    299           * CLEAR PRINT AREA                         4  0364  / 299                4   299
+  109                MCW   TEXT,231      * MOVE TEXT TO PRINT AREA                  7  0368  M 363 231            5   363     231
+  110                W                   * AND PRINT                                1  0375  2                    5
+  111         HALT   H     HALT          * THEN STOP                                4  0376  . 376                5   376
+  112                END   START         * LAST CARD: SPECIFY ENTRY POINT                    / 364 080                364
+1                                                                                                         PAGE    3
+0SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS
+
+ HALT     0376: 0    START    0364: 0    TEXT     0363: 0   

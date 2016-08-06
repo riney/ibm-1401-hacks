@@ -1,0 +1,86 @@
+ CLEAR STORAGE 1     ,008015,022026,030037,044,049,053053N000000N00001026                                         1
+ CLEAR STORAGE 2     L068116,105106,110117B101/I9I#071029C029056B026/B001/0991,001/001117I0?                      2
+ BOOTSTRAP           ,008015,022029,036040,047054,061068,072/061039              ,0010011040                      3
+0                                                                                                         PAGE    1
+0 SEQ PG LIN  LABEL  OP    OPERANDS                                            SFX CT  LOCN  INSTRUCTION TYPE  CARD A-ADDR  B-ADDR
+
+  101         *
+  102         * 1401 GISHWHES 2016 PROGRAM
+  103         * PROGRAMMER: JOHN RINEY
+  104         *
+1                          GISHWHES                                                                       PAGE    2
+0 SEQ PG LIN  LABEL  OP    OPERANDS                                            SFX CT  LOCN  INSTRUCTION TYPE  CARD A-ADDR  B-ADDR
+
+  105                JOB   GISHWHES
+  106                CTL   6611
+  107         *
+  108         TEXT   DCW   @GISHWHES 2016 - ITEM 74 @                              24  0356                       4
+  109         TEXT2  DCW   @DISTANCE FROM NEW YORK TO REYKJAVIK(IN MILES) @        46  0402                       6
+  110         TEXT3  DCW   @SPEED(IN MPH) @                                        14  0416                       6
+  111         TEXT4  DCW   @TRAVEL TIME(IN HOURS) @                                22  0438                       7
+  112         TEXT5  DCW   @THANKS TO THE COMPUTER HISTORY MUSEUM@                 37  0475                       8
+  113         TEXT6  DCW   @IN MOUNTAIN VIEW, CA@                                  20  0495                       9
+  114         *
+  115         PRINT  EQU   201                * PRINT BUFFER                           0201
+  116         *
+  117         MILES  DCW   002617             * DISTANCE TO TRAVEL                  6  0501                       9
+  118         SPEED  DCW   400                * TRAVEL SPEED                        3  0504                       9
+  119         BHD    DCW   000000             * WHERE THE QUOTIENT WILL APPEAR      6  0510                       9
+  120         BLD    DC    0000               * WHERE THE REMAINDER APPEARS         4  0514                       9
+  121         *
+  122         START  CS    332                * CLEAR PRINT AREA                    4  0515  / 332               10   332
+  123                CS                                                             1  0519  /                   10
+  124                MCW   TEXT,PRINT&23      * MOVE FIRST LINE TO PRINT AREA       7  0520  M 356 224           10   356     224
+  125                W                        * AND PRINT                           1  0527  2                   10
+  126                CS    332                * CLEAR PRINT AREA                    4  0528  / 332               10   332
+  127                CS                                                             1  0532  /                   10
+  128                W                        * SKIP A LINE                         1  0533  2                   10
+  129         *
+  130                ZA    MILES,BLD          * CLEAR TO ZEROS                      7  0534  ? 501 514           11   501     514
+  131                D     SPEED,BLD-6        * LOW ORDER OF DIVISOR ADDRESS        7  0541  % 504 508           11   504     508
+  132                CS    332                * CLEAR PRINT BUFFER                  4  0548  / 332               11   332
+  133                CS                                                             1  0552  /                   11
+  134         *
+  135                MCW   TEXT2,PRINT&45     * MOVE IN TITLE                       7  0553  M 402 246           11   402     246
+  136                MCS   MILES,PRINT&62     * MOVE IN DATA                        7  0560  Z 501 263           11   501     263
+  137                W                        * PRINT                               1  0567  2                   11
+  138                CS    332                * CLEAR PRINT BUFFER                  4  0568  / 332               12   332
+  139                CS                       * CLEAR PRINT BUFFER                  1  0572  /                   12
+  140                MCW   TEXT3,PRINT&45     * MOVE IN TITLE                       7  0573  M 416 246           12   416     246
+  141                MCS   SPEED,PRINT&62     * MOVE IN DATA                        7  0580  Z 504 263           12   504     263
+  142                W                        * PRINT                               1  0587  2                   12
+  143                CS    332                * CLEAR PRINT BUFFER                  4  0588  / 332               12   332
+  144                CS                                                             1  0592  /                   12
+  145         *
+  146                MCW   TEXT4,PRINT&45     * MOVE IN TITLE                       7  0593  M 438 246           13   438     246
+  147                MCS   BHD,PRINT&50       * MOVE IN QUOTIENT                    7  0600  Z 510 251           13   510     251
+  148                MCW   @ AND @,PRINT&55   * MOVE IN TITLE                       7  0607  M 678 256           13   678     256
+  149                SW    BLD-3              * SET WM SO REMAINDER CAN BE EXTR     4  0614  , 511               13   511
+  150                MCS   BLD,PRINT&58       * MOVE IN REMAINDER                   7  0618  Z 514 259           13   514     259
+  151                CW    BLD-3              * CLEAR THE WORD MARK                 4  0625  ) 511               13   511
+  152                MCW   @/@,PRINT&59       * MOVE IN SEPARATOR                   7  0629  M 679 260           14   679     260
+  153                MCS   SPEED,PRINT&62     * MOVE IN DENOMINATOR                 7  0636  Z 504 263           14   504     263
+  154                W                        * PRINT                               1  0643  2                   14
+1                          GISHWHES                                                                       PAGE    3
+0 SEQ PG LIN  LABEL  OP    OPERANDS                                            SFX CT  LOCN  INSTRUCTION TYPE  CARD A-ADDR  B-ADDR
+
+  155                CS    332                * CLEAR PRINT AREA                    4  0644  / 332               14   332
+  156                CS                                                             1  0648  /                   14
+  157                W                        * BLANK LINE                          1  0649  2                   14
+  158         *
+  159                MCW   TEXT5,PRINT&36     * LOAD THANKS                         7  0650  M 475 237           14   475     237
+  160                MCW   TEXT6,PRINT&57     * TWO VARIABLES WORTH                 7  0657  M 495 258           15   495     258
+  161                W                        * AND PRINT                           1  0664  2                   15
+  162                CS    332                * CLEAR PRINT AREA                    4  0665  / 332               15   332
+  163                CS                                                             1  0669  /                   15
+  164         *
+  165         HALT   H     HALT               * THEN STOP                           4  0670  . 670               15   670
+                     DCW   @ AND @                                                  5  0678              LIT     15
+                     DCW   @/@                                                      1  0679              LIT     15
+  166                END   START              * LAST CARD: SPECIFY ENTRY POINT               / 515 080                515
+1                                                                                                         PAGE    4
+0SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS    SYMBOL   ADDRESS
+
+ BHD      0510: 0    BLD      0514: 0    HALT     0670: 0    MILES    0501: 0    PRINT    0201: 0    SPEED    0504: 0   
+ START    0515: 0    TEXT     0356: 0    TEXT2    0402: 0    TEXT3    0416: 0    TEXT4    0438: 0    TEXT5    0475: 0   
+ TEXT6    0495: 0   
