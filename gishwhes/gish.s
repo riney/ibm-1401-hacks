@@ -1,6 +1,7 @@
-     *         
+     *
      * 1401 GISHWHES 2016 PROGRAM
      * PROGRAMMER: JOHN RINEY
+     * MODIFIED FROM CODE BY STAN PADDOCK
      *
                JOB  GISHWHES
                CTL  6611
@@ -11,9 +12,9 @@
      TEXT4     DCW  @TRAVEL TIME(IN HOURS) @
      TEXT5     DCW  @THANKS TO THE COMPUTER HISTORY MUSEUM@
      TEXT6     DCW  @IN MOUNTAIN VIEW, CA@
-     
+
      PRINT     EQU  201                * PRINT BUFFER
-     
+
      MILES     DCW  002617             * DISTANCE TO TRAVEL
      SPEED     DCW  400                * TRAVEL SPEED
      BHD       DCW  000000             * WHERE THE QUOTIENT WILL APPEAR
@@ -55,12 +56,12 @@
                CS   332                * CLEAR PRINT AREA
                CS
                W                       * BLANK LINE
-     
+
                MCW  TEXT5,PRINT+36     * LOAD THANKS
                MCW  TEXT6,PRINT+57     * TWO VARIABLES WORTH
                W                       * AND PRINT
                CS   332                * CLEAR PRINT AREA
-               CS 
+               CS
 
      HALT      H    HALT               * THEN STOP
                END  START              * LAST CARD: SPECIFY ENTRY POINT
